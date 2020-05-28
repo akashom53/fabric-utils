@@ -3,8 +3,14 @@ let gsmInput, widthInput, outP
 const calcLength = (gsm, width) => 1000/(gsm * width)
 
 const onChange = () => {
-    const length = calcLength(gsmInput.value, widthInput.value)
-    outP.innerHTML = (Math.round(length * 100) / 100).toFixed(2) + " meters"
+    let length = calcLength(gsmInput.value, widthInput.value) + ""
+    if (length === 'Infinity') length = '0'
+    if (length.includes('.')) {
+        let dotIndex = length.indexOf('.')
+        length = length.substr(0, dotIndex+3)
+    }
+
+    outP.innerHTML = length + " meters"
 }
 
 
